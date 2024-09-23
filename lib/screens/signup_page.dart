@@ -9,6 +9,7 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  // TODO IMPLEMENT PROPER SIGN UP LOGIC
   void signup() {}
 
   @override

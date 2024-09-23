@@ -11,6 +11,7 @@ class CryptoDetailsPage extends StatelessWidget {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
+          // TODO REPLACE WITH REAL DATA
           SliverAppBar(
             expandedHeight: 200,
             floating: false,
@@ -49,6 +50,8 @@ class CryptoDetailsPage extends StatelessWidget {
       ),
     );
   }
+
+// TODO REFACTOR ALL OF THE FOLLOWING
 
   Widget _buildPriceSection() {
     return Row(

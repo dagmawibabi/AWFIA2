@@ -3,7 +3,7 @@
 import 'package:awfia2/components/each_crypto.dart';
 import 'package:awfia2/screens/ai_chat_page.dart';
 import 'package:flutter/material.dart';
-import 'package:fl_chart/fl_chart.dart';
+import 'package:awfia2/components/chart_bottomsheet.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,7 +15,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final TextEditingController _searchController = TextEditingController();
 
-  // Sample data for cryptocurrencies (replace with real data later)
+  // TODO IMPLEMENT API FETCHING
   final List<Map<String, dynamic>> _cryptocurrencies = [
     {
       'name': 'Bitcoin',
@@ -59,6 +59,15 @@ class _HomePageState extends State<HomePage> {
     },
   ];
 
+  void showBottomSheet(BuildContext context, Map<String, dynamic> crypto) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return ChartBottomsheet(crypto: crypto);
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,6 +91,7 @@ class _HomePageState extends State<HomePage> {
               Icons.auto_awesome_outlined,
             ),
           ),
+          // TODO IMPLEMENT THEMING
           IconButton(
             icon: const Icon(Icons.wb_sunny_outlined),
             onPressed: () {},
@@ -90,6 +100,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Column(
         children: [
+          // TODO IMPLEMENT PROPER SEARCH FUNCTION
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextField(
@@ -109,7 +120,7 @@ class _HomePageState extends State<HomePage> {
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onLongPress: () =>
-                      _showBottomSheet(context, _cryptocurrencies[index]),
+                      showBottomSheet(context, _cryptocurrencies[index]),
                   child: EachCrypto(
                     crypto: _cryptocurrencies[index],
                   ),
@@ -119,61 +130,6 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-    );
-  }
-
-  void _showBottomSheet(BuildContext context, Map<String, dynamic> crypto) {
-    showModalBottomSheet(
-      context: context,
-      builder: (BuildContext context) {
-        return Container(
-          height: 300,
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                '${crypto['name']} Price Chart',
-                style:
-                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 16),
-              Expanded(
-                child: LineChart(
-                  LineChartData(
-                    gridData: const FlGridData(show: false),
-                    titlesData: const FlTitlesData(show: false),
-                    borderData: FlBorderData(show: false),
-                    minX: 0,
-                    maxX: 7,
-                    minY: 0,
-                    maxY: 6,
-                    lineBarsData: [
-                      LineChartBarData(
-                        spots: [
-                          const FlSpot(0, 3),
-                          const FlSpot(1, 1),
-                          const FlSpot(2, 4),
-                          const FlSpot(3, 2),
-                          const FlSpot(4, 5),
-                          const FlSpot(5, 1),
-                          const FlSpot(6, 4),
-                        ],
-                        isCurved: true,
-                        color: Colors.blue,
-                        barWidth: 3,
-                        isStrokeCapRound: true,
-                        dotData: const FlDotData(show: false),
-                        belowBarData: BarAreaData(show: false),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        );
-      },
     );
   }
 }

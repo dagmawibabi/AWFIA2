@@ -12,6 +12,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   bool rememberMe = false;
 
+  // TODO IMPLEMENT PROPER LOGIN LOGIC
   void login() {
     Navigator.push(
       context,
@@ -21,8 +22,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  void signup() {}
-
+  // TODO SAVE REMEMBER ME STATE TO LOCAL STORAG
   void toggleRememberMe() {
     rememberMe = !rememberMe;
     setState(() {});
